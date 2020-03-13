@@ -12,7 +12,7 @@ ansible-playbook -i inventory install.yml -e argocd_install=true --vault-passwor
 ```
 oc new-project argocd --display-name="ArgoCD" --description="ArgoCD"
 oc apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v1.4.2/manifests/install.yaml
-sudo curl -L  https://github.com/argoproj/argo-cd/releases/download/v1.4.2/argocd-linux-amd64 -o /usr/bin/argocd
+curl -L  https://github.com/argoproj/argo-cd/releases/download/v1.4.2/argocd-linux-amd64 -o /usr/bin/argocd
 sudo chmod +x /usr/bin/argocd
 oc port-forward svc/argocd-server -n argocd 4443:443 &
 ```
@@ -331,9 +331,9 @@ argocd app delete amq-streams
 
 `nexus operator`
 ```
-argocd repo add git@github.com:eformat/argocd.git --ssh-private-key-path ~/.ssh/id_rsa
+argocd repo add git@github.com:springdo/argocd.git --ssh-private-key-path ~/.ssh/id_rsa
 argocd app create nexus \
-  --repo git@github.com:eformat/argocd.git \
+  --repo https://github.com/springdo/argocd.git \
   --path nexus \
   --dest-server https://kubernetes.default.svc \
   --dest-namespace nexus \
